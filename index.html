@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cicera Andra | Revendedora O Boticário em Nova Aparecidinha</title>
+<meta name="description" content="Catálogos e produtos de pronta entrega da Cicera Andra, revendedora independente em Nova Aparecidinha, Sorocaba.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --verde:#1f4d3a; --verde-claro:#e4efe8; --rosa:#c2336b; --rosa-escuro:#9f2656;
+  --fundo:#fbfaf7; --texto:#22302a; --suave:#5d6b64; --linha:#d5ded8;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Nunito,system-ui,sans-serif;background:var(--fundo);color:var(--texto);line-height:1.6;font-size:17px}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;line-height:1.2;margin:0 0 .5em}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--rosa);outline-offset:2px}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+header{background:var(--verde);color:#fff}
+header .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:14px;padding-bottom:14px;flex-wrap:wrap}
+header strong{font-family:Fraunces,Georgia,serif;font-size:1.25rem}
+header nav a{margin-left:18px;text-decoration:none;font-weight:600}
+header nav a:hover{text-decoration:underline}
+.hero{padding:44px 0 28px}
+.hero h1{font-size:clamp(1.9rem,5vw,3rem);color:var(--verde);max-width:16ch}
+.hero p{max-width:52ch;color:var(--suave);margin:0 0 20px}
+.btn{display:inline-block;background:var(--rosa);color:#fff;padding:12px 22px;border-radius:8px;font-weight:700;text-decoration:none;border:0;cursor:pointer;font-size:1rem}
+.btn:hover{background:var(--rosa-escuro)}
+.btn.sec{background:transparent;color:var(--verde);border:2px solid var(--verde)}
+.btn.sec:hover{background:var(--verde-claro)}
+section{padding:36px 0}
+section h2{font-size:1.7rem;color:var(--verde)}
+.sub{color:var(--suave);margin-top:-.2em;margin-bottom:22px;max-width:60ch}
+.grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
+.item{background:#fff;border:1px solid var(--linha);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:6px}
+.item .cat{font-size:.85rem;color:var(--suave)}
+.item h3{font-size:1.1rem;margin:0}
+.item .preco{font-weight:700;color:var(--verde);font-size:1.15rem;margin-top:auto}
+.item a.btn{padding:9px 14px;font-size:.95rem;text-align:center}
+.vazio{padding:20px;background:var(--verde-claro);border-radius:10px}
+.filtros{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.filtros button{font:inherit;padding:7px 14px;border-radius:999px;border:1px solid var(--verde);background:#fff;color:var(--verde);cursor:pointer;font-weight:600}
+.filtros button[aria-pressed="true"]{background:var(--verde);color:#fff}
+.catalogos{background:var(--verde-claro)}
+.catalogos .lista{display:flex;flex-wrap:wrap;gap:12px}
+.passos{list-style:decimal;padding-left:1.3em;max-width:60ch}
+.passos li{margin-bottom:8px}
+footer{background:var(--verde);color:#dfe9e3;padding:26px 0;font-size:.9rem}
+footer p{margin:.3em 0}
+.zap{position:fixed;right:16px;bottom:16px;z-index:10;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <strong>Cicera Andra</strong>
+    <nav aria-label="Principal">
+      <a href="#pronta-entrega">Pronta entrega</a>
+      <a href="#catalogos">Catálogos</a>
+      <a href="#como-pedir">Como pedir</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<div class="wrap">
+  <div class="hero">
+    <h1>Perfumaria e beleza com entrega no bairro</h1>
+    <p>Sou a Cicera, revendedora independente de O Boticário em Nova Aparecidinha, Sorocaba. Veja o que tenho em estoque para entregar hoje ou escolha qualquer item no catálogo.</p>
+    <a class="btn" href="#pronta-entrega">Ver pronta entrega</a>
+    <a class="btn sec" href="#catalogos">Abrir catálogos</a>
+  </div>
+</div>
+
+<section id="pronta-entrega">
+  <div class="wrap">
+    <h2>Pronta entrega</h2>
+    <p class="sub">Produtos que já estão comigo. Atualizado em <span id="atualizado">--/--/----</span>.</p>
+    <div class="filtros" id="filtros" role="group" aria-label="Filtrar por categoria"></div>
+    <div class="grade" id="grade"></div>
+  </div>
+</section>
+
+<section id="catalogos" class="catalogos">
+  <div class="wrap">
+    <h2>Catálogos</h2>
+    <p class="sub">Não achou na pronta entrega? Escolha no catálogo e eu faço o pedido para você.</p>
+    <div class="lista" id="lista-catalogos"></div>
+  </div>
+</section>
+
+<section id="como-pedir">
+  <div class="wrap">
+    <h2>Como pedir</h2>
+    <ol class="passos">
+      <li>Escolha o produto na pronta entrega ou no catálogo.</li>
+      <li>Clique em "Pedir pelo WhatsApp" e envie a mensagem.</li>
+      <li>Combine comigo a entrega no bairro e a forma de pagamento.</li>
+    </ol>
+    <a class="btn" id="zap-principal" href="#">Falar com a Cicera</a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong>Cicera Andra</strong> · Nova Aparecidinha, Sorocaba/SP</p>
+    <p>Revendedora independente de O Boticário. Este site não é oficial nem pertence à marca. Preços e disponibilidade podem mudar sem aviso.</p>
+    <p>Site criado como atividade de extensão do curso de Análise e Desenvolvimento de Sistemas da UNIP.</p>
+  </div>
+</footer>
+
+<a class="btn zap" id="zap-flutuante" href="#">WhatsApp</a>
+
+<script>
+/* ===== EDITE AQUI ===== */
+var WHATSAPP = "5515999999999"; // 55 + DDD + número, só dígitos
+var ATUALIZADO = "13/10/2026";  // data da última atualização do estoque
+
+// Pronta entrega: troque pelos produtos que ela tem em estoque.
+var PRONTA_ENTREGA = [
+  { nome: "Exemplo: Perfume feminino 100 ml", categoria: "Perfumaria", preco: "R$ 0,00" },
+  { nome: "Exemplo: Desodorante colônia", categoria: "Perfumaria", preco: "R$ 0,00" },
+  { nome: "Exemplo: Hidratante corporal", categoria: "Corpo e banho", preco: "R$ 0,00" },
+  { nome: "Exemplo: Shampoo e condicionador", categoria: "Cabelos", preco: "R$ 0,00" },
+  { nome: "Exemplo: Batom", categoria: "Maquiagem", preco: "R$ 0,00" },
+  { nome: "Exemplo: Kit de presente", categoria: "Presentes", preco: "R$ 0,00" }
+];
+
+// Catálogos: cole o link de cada catálogo ou da loja de revendedora dela.
+var CATALOGOS = [
+  { nome: "Catálogo do ciclo atual", url: "#" },
+  { nome: "Loja online da Cicera", url: "#" }
+];
+/* ===== FIM DA ÁREA DE EDIÇÃO ===== */
+
+function linkZap(texto){
+  return "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(texto);
+}
+
+document.getElementById("atualizado").textContent = ATUALIZADO;
+var geral = linkZap("Oi, Cicera! Vim pelo seu site e quero saber mais sobre os produtos.");
+document.getElementById("zap-principal").href = geral;
+document.getElementById("zap-flutuante").href = geral;
+
+var catAtual = "Todas";
+function desenhar(){
+  var grade = document.getElementById("grade");
+  grade.innerHTML = "";
+  var itens = PRONTA_ENTREGA.filter(function(p){ return catAtual === "Todas" || p.categoria === catAtual; });
+  if(!itens.length){
+    grade.innerHTML = '<div class="vazio">No momento não tenho itens nessa categoria. Veja os catálogos abaixo.</div>';
+    return;
+  }
+  itens.forEach(function(p){
+    var d = document.createElement("div");
+    d.className = "item";
+    var c = document.createElement("span"); c.className = "cat"; c.textContent = p.categoria;
+    var h = document.createElement("h3"); h.textContent = p.nome;
+    var pr = document.createElement("span"); pr.className = "preco"; pr.textContent = p.preco;
+    var a = document.createElement("a"); a.className = "btn"; a.textContent = "Pedir pelo WhatsApp";
+    a.href = linkZap("Oi, Cicera! Quero pedir: " + p.nome + " (pronta entrega).");
+    d.append(c, h, pr, a);
+    grade.appendChild(d);
+  });
+}
+
+function desenharFiltros(){
+  var cats = ["Todas"];
+  PRONTA_ENTREGA.forEach(function(p){ if(cats.indexOf(p.categoria) < 0) cats.push(p.categoria); });
+  var box = document.getElementById("filtros");
+  box.innerHTML = "";
+  cats.forEach(function(c){
+    var b = document.createElement("button");
+    b.type = "button"; b.textContent = c;
+    b.setAttribute("aria-pressed", c === catAtual ? "true" : "false");
+    b.onclick = function(){ catAtual = c; desenharFiltros(); desenhar(); };
+    box.appendChild(b);
+  });
+}
+
+CATALOGOS.forEach(function(c){
+  var a = document.createElement("a");
+  a.className = "btn"; a.textContent = c.nome; a.href = c.url;
+  a.target = "_blank"; a.rel = "noopener";
+  document.getElementById("lista-catalogos").appendChild(a);
+});
+
+desenharFiltros();
+desenhar();
+</script>
+</body>
+</html>
